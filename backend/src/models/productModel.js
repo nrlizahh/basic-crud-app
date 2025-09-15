@@ -24,4 +24,20 @@ async function getProductById(id) {
   const result = await pool.query('SELECT * FROM products WHERE id=$1', [id]);
   return result.rows[0];
 }
-module.exports = {getProducts, createProduct, getProductById};
+
+//edit product
+async function editProduct(id, name, description) {
+  const result = await pool.query(
+    'UPDATE products SET name=$1, description=$2 WHERE id=$3 RETURNING *',
+    [name, description, id]
+  );
+  return result.rows[0];
+}
+
+//delete product
+async function deleteProduct(id) {
+  const result = await pool.query('DELETE FROM products WHERE id=$1', [id]);
+  return result.rowCount > 0;
+}
+
+module.exports = {getProducts, createProduct, getProductById, editProduct, deleteProduct};

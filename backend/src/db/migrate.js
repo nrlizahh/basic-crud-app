@@ -15,7 +15,7 @@ const migration = async () => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(200) NOT NULL,
         description TEXT,
-        created_by INT REFERENCES users(id)
+        user_id INT REFERENCES users(id)
       );
     `);
 

@@ -15,4 +15,13 @@ async function findUserByUsername(username) {
   return result.rows[0];
 }
 
-module.exports = { register, findUserByUsername };
+async function findUserById(id) {
+  const result = await pool.query(
+    "SELECT * FROM users WHERE id = $1",
+    [id]
+  );
+  return result.rows[0];
+}
+
+
+module.exports = { register, findUserByUsername, findUserById };
