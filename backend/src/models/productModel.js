@@ -1,5 +1,4 @@
 const pool = require('../db/config');
-const { get } = require('../routes');
 
 //get all products
 async function getProducts(limit, offset) {
