@@ -5,6 +5,7 @@ const userController = require('../controllers/userController');
 
 //router user
 router.post('/register', userController.registerUser);
+router.post('/login', userController.loginUser);
 
 //router product
 router.get('/products', productController.listProducts);
