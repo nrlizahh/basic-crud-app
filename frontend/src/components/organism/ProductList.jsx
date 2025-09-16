@@ -1,17 +1,15 @@
-import React from 'react';
-import ProductCard from '../molecules/ProductCard';
-
-export default function ProductList({ products, onDetail, onEdit, onDelete }) {
+export default function ProductList({ products, onDetail }) {
   return (
-    <div>
+    <div className="grid gap-4">
       {products.map((p) => (
-        <ProductCard
+        <div
           key={p.id}
-          product={p}
-          onDetail={onDetail}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
+          className="border p-4 rounded cursor-pointer hover:shadow-md"
+          onClick={() => onDetail(p.id)} // panggil callback untuk navigasi ke detail
+        >
+          <h2 className="font-bold">{p.name}</h2>
+          <p>{p.description}</p>
+        </div>
       ))}
     </div>
   );
