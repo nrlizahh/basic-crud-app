@@ -3,6 +3,7 @@ import {API} from '../../../helpers/http-client';
 import ProductList from '../organism/ProductList';
 import Button from '../atoms/Button';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../molecules/Navbar';
 
 export default function ProductListPage() {
   const [products, setProducts] = useState([]);
@@ -25,11 +26,14 @@ export default function ProductListPage() {
 
   return (
     <div className="max-w-xl mx-auto">
+
+      <Navbar />
+      
       <h1 className="text-2xl mb-4">Products</h1>
       <Button onClick={() => navigate('/add')}>Add Product</Button>
       <ProductList
         products={products}
-        onDetail={(id) => navigate(`/edit/${id}`)}
+        onDetail={(id) => navigate(`/detail/${id}`)}
         onEdit={(id) => navigate(`/edit/${id}`)}
         onDelete={handleDelete}
       />
