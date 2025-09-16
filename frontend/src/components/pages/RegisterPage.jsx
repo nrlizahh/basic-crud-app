@@ -8,7 +8,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!username || !password) {
@@ -21,19 +21,22 @@ export default function Register() {
     }
 
     try {
-      const res = await API.post("/register", { username, password });
+      await API.post("/users/register", { username, password });
 
       Swal.fire({
-        icon: "success",
+        toast: true, 
+        position: "top-end",
+        icon: "success", 
         title: "Register Successful",
         text: "You can now login!",
-        confirmButtonText: "OK",
-        customClass: {
-          confirmButton: "bg-green-600 hover:bg-green-700 text-white",
-        },
+        showConfirmButton: false, 
+        timer: 3000, 
+        background: "#ffffff", 
+        color: "#1d4ed8", 
+        iconColor: "#1d4ed8", 
       });
 
-      navigate("/login"); // redirect ke login
+      navigate("/login");
     } catch (err) {
       console.error(err);
       Swal.fire({
@@ -51,27 +54,17 @@ export default function Register() {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        className="w-full max-w-md bg-opacity-80 p-8 rounded-lg shadow-2xl border-2 border-gray-300"
-        style={{ backgroundColor: "#1a1b1e" }}
-      >
-        <h2 className="text-3xl font-bold text-center text-white mb-6">
-          Register
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-50 to-white dark:from-slate-800 dark:via-slate-900 dark:to-black">
+      <div className="bg-white/80 dark:bg-slate-800/80 shadow-xl rounded-2xl p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">
+          Create Account
         </h2>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Username */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="username"
-              className="block text-white font-medium mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
               Username
             </label>
@@ -81,16 +74,16 @@ export default function Register() {
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Your username"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-white bg-transparent"
+              className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your username"
             />
           </div>
 
           {/* Password */}
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="password"
-              className="block text-white font-medium mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
               Password
             </label>
@@ -100,18 +93,30 @@ export default function Register() {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-white bg-transparent"
+              className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your password"
             />
           </div>
 
+          {/* Button */}
           <button
             type="submit"
-            className="w-full bg-red-600 text-white font-semibold py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="w-full py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors duration-300 shadow-md"
           >
             Register
           </button>
         </form>
+
+        {/* Link to login */}
+        <p className="text-center text-sm text-gray-600 dark:text-gray-300 mt-6">
+          Already have an account?{" "}
+          <button
+            onClick={() => navigate("/login")}
+            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+          >
+            Log in
+          </button>
+        </p>
       </div>
     </div>
   );

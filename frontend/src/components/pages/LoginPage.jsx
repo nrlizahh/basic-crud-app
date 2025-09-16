@@ -12,7 +12,7 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const res = await API.post("/login", { username, password });
+      const res = await API.post("/users/login", { username, password });
 
       // Ambil token dari response
       const { token } = res.data;
