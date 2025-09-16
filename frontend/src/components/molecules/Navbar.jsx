@@ -1,40 +1,69 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
-export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function Navbar({ onCreate }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    setIsLoggedIn(!!token); 
-  }, []);
+  const location = useLocation();
 
   const handleAuthClick = () => {
-    if (isLoggedIn) {
+    const token = localStorage.getItem("access_token");
+    if (token) {
       localStorage.removeItem("access_token");
-      setIsLoggedIn(false);
-      navigate("/login"); 
+      navigate("/login");
     } else {
-      // Login
       navigate("/login");
     }
   };
 
+  const handleCreateClick = () => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "Unauthorized",
+        text: "Please login first to create a product",
+        confirmButtonColor: "#1d4ed8",
+      });
+    } else {
+      onCreate(); // buka modal
+    }
+  };
+
+  const getPageTitle = () => {
+    const path = location.pathname;
+    if (path === "/" || path === "/products") return "Product List";
+    if (path.startsWith("/products/")) return "Detail Product";
+    return "My Product";
+  };
+
   return (
-    <nav className="bg-blue-900 text-white sticky top-0 z-50 shadow-lg px-6 py-4 flex justify-between items-center">
-      {/* Logo */}
-      <div className="text-2xl font-extrabold tracking-wider">
-        MyLogo
+    <nav className="bg-blue-200 text-black sticky top-0 z-50 shadow-lg px-6 py-4 flex justify-between items-center">
+      <div
+        className="text-xl font-extrabold tracking-wider cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        {getPageTitle()}
       </div>
 
-      {/* Tombol Login/Logout */}
-      <button
-        onClick={handleAuthClick}
-        className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-      >
-        {isLoggedIn ? "Log Out" : "Sign In"}
-      </button>
+      <div className="flex items-center gap-4 mt-2">
+        {/* Tombol Create selalu muncul */}
+        <span
+          onClick={handleCreateClick}
+          className="hover:underline cursor-pointer"
+        >
+          Create Product
+        </span>
+
+        <div className="h-6 border-l border-gray-400"></div>
+
+        <span
+          onClick={handleAuthClick}
+          className="hover:underline cursor-pointer"
+        >
+          {localStorage.getItem("access_token") ? "Logout" : "Login"}
+        </span>
+      </div>
     </nav>
   );
 }
