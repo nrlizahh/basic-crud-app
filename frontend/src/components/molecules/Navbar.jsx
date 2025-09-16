@@ -7,15 +7,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    setIsLoggedIn(!!token); // true jika ada token
+    setIsLoggedIn(!!token); 
   }, []);
 
   const handleAuthClick = () => {
     if (isLoggedIn) {
-      // Logout
       localStorage.removeItem("access_token");
       setIsLoggedIn(false);
-      navigate("/login"); // arahkan ke login setelah logout
+      navigate("/login"); 
     } else {
       // Login
       navigate("/login");

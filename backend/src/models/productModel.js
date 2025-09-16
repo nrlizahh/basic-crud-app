@@ -12,7 +12,7 @@ async function getProducts(limit, offset) {
 //create product
 async function createProduct(name, description, userId) {
   const result = await pool.query(
-    'INSERT INTO products(name,description,created_by) VALUES($1,$2,$3) RETURNING *',
+    'INSERT INTO products(name,description,user_id) VALUES($1,$2,$3) RETURNING *',
     [name, description, userId]
   );
   return result.rows[0];
