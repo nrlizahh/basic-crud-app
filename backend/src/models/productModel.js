@@ -32,13 +32,13 @@ async function getProductById(id) {
 }
 
 // Edit produk
-async function editProduct(id, name, description, imageUrl) {
+async function editProduct(id, name, description) {
   const result = await pool.query(
     `UPDATE products 
-     SET name=$1, description=$2, image_url=$3 
-     WHERE id=$4 
+     SET name=$1, description=$2
+     WHERE id=$3 
      RETURNING *`,
-    [name, description, imageUrl, id]
+    [name, description, id]
   );
   return result.rows[0];
 }

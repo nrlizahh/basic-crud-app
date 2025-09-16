@@ -8,45 +8,66 @@ const {
 
 //see all product
 async function listProducts(req, res) {
-  const page = parseInt(req.query.page) || 1;
-  const limit = 10;
-  const offset = (page - 1) * limit;
-  const products = await getProducts(limit, offset);
-  res.json(products);
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    const products = await getProducts(limit, offset);
+
+    res.json({
+      page,
+      limit,
+      products,
+    });
+  } catch (err) {
+    console.error("Error listProducts:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 }
 
 //create new product
 async function createNewProduct(req, res) {
-  const { name, description } = req.body;
-  const userId = req.user.id;
-  console.log("User ID from token:", userId); // cek userId dari token
-  if (!name || !description) {
-    return res
-      .status(400)
-      .json({ message: "Name and description are required" });
-  }
   try {
-    const newProduct = await createProduct(name, description, userId);
-    res
-      .status(201)
-      .json({ message: "Product created successfully", product: newProduct });
+    const { name, description } = req.body;
+    const userId = req.user.id;
+    if (!name || !description) {
+      return res
+        .status(400)
+        .json({ message: "Name and description are required" });
+    }
+
+    // dummy image
+    const dummyImage = `https://picsum.photos/300?random=${Date.now()}`;
+
+    const newProduct = await createProduct(
+      name,
+      description,
+      dummyImage,
+      userId
+    );
+
+    res.status(201).json({
+      message: "Product created successfully",
+      product: newProduct,
+    });
   } catch (err) {
-    console.error(err);
+    console.error("Error createNewProduct:", err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
 //detail product by id
 async function detailProduct(req, res) {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const product = await getProductById(id);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    res.json({product});
+    res.json({ product });
   } catch (err) {
-    console.error(err);
+    console.error("Error detailProduct:", err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
