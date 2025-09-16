@@ -48,7 +48,7 @@ export default function ProductDetail() {
           Delete
         </button>
         <button
-          onClick={() => navigate(`/products/edit/${id}`)}
+          onClick={() => navigate(`/products/${product.id}/edit`)}
           className="bg-yellow-500 text-white py-2 px-4 rounded"
         >
           Edit
