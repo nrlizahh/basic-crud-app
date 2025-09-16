@@ -24,7 +24,7 @@ export default function ProductListPage() {
   }, [page]);
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="mx-auto">
       <Navbar />
 
       <h1 className="text-2xl mb-4">Products</h1>

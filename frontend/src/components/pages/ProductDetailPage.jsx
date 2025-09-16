@@ -7,13 +7,19 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("access_token");
+  if (!token) {
+    Swal.fire("Unauthorized", "Please login first", "warning");
+    navigate("/login");
+  }
+
   // Fetch product detail saat halaman di-load
   useEffect(() => {
     API.get(`/products/${id}`)
       .then((res) => {
         console.log(res.data, "<<< detail product");
-        setProduct(res.data.product)}
-      )
+        setProduct(res.data.product);
+      })
       .catch((err) => {
         console.error(err);
         alert("Failed to fetch product");
@@ -25,9 +31,14 @@ export default function ProductDetail() {
     if (!window.confirm("Are you sure want to delete this product?")) return;
 
     try {
-      await API.delete(`/products/${id}`);
+      const token = localStorage.getItem("access_token"); // ambil token
+      await API.delete(`/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       alert("Product deleted!");
-      navigate("/"); // kembali ke homepage
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Error deleting product");

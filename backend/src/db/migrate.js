@@ -1,4 +1,4 @@
-const pool = require('./config');
+const pool = require("./config");
 
 const migration = async () => {
   try {
@@ -15,11 +15,12 @@ const migration = async () => {
         id SERIAL PRIMARY KEY,
         name VARCHAR(200) NOT NULL,
         description TEXT,
+        image_url TEXT,
         user_id INT REFERENCES users(id)
       );
     `);
 
-    console.log('Migration sukses 🚀');
+    console.log("Migration sukses 🚀");
     process.exit(0);
   } catch (err) {
     console.error(err);
