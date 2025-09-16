@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../../helpers/http-client";
-import illustration from "../../../public/hello.png"; 
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -60,7 +59,7 @@ export default function Login() {
       <div className="bg-white rounded-2xl shadow-xl flex w-full max-w-4xl overflow-hidden">
         {/* Left illustration */}
         <div className="hidden md:flex w-1/2 bg-blue-100 items-center justify-center">
-          <img src={illustration} alt="Illustration" className="w-3/4 h-auto" />
+          <img src="/hello.png" alt="Illustration" className="w-3/4 h-auto" />
         </div>
 
         {/* Right form */}
