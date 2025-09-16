@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../../helpers/http-client";
-import Navbar from "../molecules/Navbar";
-import AddEditProductModal from "../molecules/AddProductPage";
+import Navbar from "../organism/Navbar";
+import AddEditProductModal from "../molecules/AddEditProductPage";
 
 export default function ProductDetail() {
   const { id } = useParams();

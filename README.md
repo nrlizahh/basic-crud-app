@@ -19,10 +19,10 @@ This is a full-stack CRUD application with user authentication and product manag
 
 ### Frontend
 - Built using **Atomic Design** principles:  
-  - **Atoms**: Buttons, Inputs, Labels  
-  - **Molecules**: Form components, Card components  
-  - **Organisms**: Lists, Navbars  
-  - **Pages**: Product list page, Product detail page  
+  - **Atoms**: Buttons 
+  - **Molecules**: Add/Edit product page, product card
+  - **Organisms**: Product Lists, Navbar  
+  - **Pages**: Product list page, Product detail page, Login Page, Register Page
 
 ### Backend
 - **Clean Domain Driven Design**

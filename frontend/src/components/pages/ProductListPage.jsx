@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { API } from "../../../helpers/http-client";
 import ProductList from "../organism/ProductList";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../molecules/Navbar";
-import AddEditProductModal from "../molecules/AddProductPage";
+import Navbar from "../organism/Navbar";
+import AddEditProductModal from "../molecules/AddEditProductPage";
 
 export default function ProductListPage() {
   const navigate = useNavigate();
