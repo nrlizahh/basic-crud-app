@@ -3,7 +3,7 @@ import { API } from "../../../helpers/http-client";
 import ProductList from "../organism/ProductList";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../molecules/Navbar";
-import AddEditProductModal from "../pages/AddProductPage"; // pastikan modal ada
+import AddEditProductModal from "../molecules/AddProductPage";
 
 export default function ProductListPage() {
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ export default function ProductListPage() {
   return (
     <div>
       <Navbar onCreate={handleCreate} /> {/* <-- pass function ke navbar */}
-
       <div className="bg-gray-200 min-h-screen flex flex-col items-center p-4">
         <ProductList
           products={products}
@@ -90,7 +89,6 @@ export default function ProductListPage() {
 
         {loading && <p className="mt-4 text-gray-600">Loading products...</p>}
       </div>
-
       {/* Modal Add Product */}
       {modalOpen && (
         <AddEditProductModal

@@ -3,12 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../../helpers/http-client";
 import Navbar from "../molecules/Navbar";
-import AddEditProductModal from "../pages/AddProductPage"; // import modal
+import AddEditProductModal from "../molecules/AddProductPage";
 
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false); // state modal
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
@@ -41,7 +41,17 @@ export default function ProductDetail() {
       await API.delete(`/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      Swal.fire("Deleted!", "Product has been deleted.", "success");
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Product delete successfully",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "#ffffff",
+        color: "#1d4ed8",
+        iconColor: "#1d4ed8",
+      });
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -63,7 +73,7 @@ export default function ProductDetail() {
       });
       return;
     }
-    setModalOpen(true); // buka modal edit
+    setModalOpen(true);
   };
 
   if (!product) return <p className="text-center mt-8">Loading...</p>;
@@ -112,9 +122,9 @@ export default function ProductDetail() {
       {/* Modal edit product */}
       {modalOpen && (
         <AddEditProductModal
-          product={product} // kirim data lama ke modal
+          product={product}
           onClose={() => setModalOpen(false)}
-          onSuccess={fetchProduct} // refresh setelah edit
+          onSuccess={fetchProduct}
         />
       )}
     </div>

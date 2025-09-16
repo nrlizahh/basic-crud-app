@@ -52,8 +52,8 @@ export default function AddEditProductModal({ product, onClose, onSuccess }) {
         });
       }
 
-      onSuccess(); // refresh list produk
-      onClose();   // tutup modal
+      onSuccess(); 
+      onClose();   
     } catch (err) {
       console.error(err);
       Swal.fire("Error", err.response?.data?.message || "Failed", "error");
