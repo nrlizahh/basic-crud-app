@@ -1,4 +1,6 @@
-const serverless = require('@vercel/node');
-const app = require('../src/app'); // import Express app
+const app = require("../src/app");
 
-module.exports = serverless(app);
+// optional: debug log
+console.log("API entry point loaded");
+
+module.exports = app; // Vercel otomatis handle request
