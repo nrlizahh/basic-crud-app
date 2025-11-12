@@ -7,17 +7,22 @@ const pool = new Pool({
     host : process.env.DB_HOST,
     port : process.env.DB_PORT,
     database : process.env.DB_NAME,
-    idleTimeoutMillis : 500
+    idleTimeoutMillis : 500,
+    ssl: {
+    require: true,
+    rejectUnauthorized: false, 
+  },
 })
 
-// let test = async() => {
-//     try {
-//         console.log(await pool.query('SELECT NOW()'))
-//     } catch (error) {
-//         console.log("error");
-//     }
-// }
+let test = async() => {
+    try {
+        const res = await pool.query('SELECT NOW()')
+        console.log("Koneksi berhasil:", res.rows[0])
+    } catch (error) {
+        console.log("Koneksi gagal:", error)
+    }
+}
 
-// test()
+test()
 
 module.exports = pool
