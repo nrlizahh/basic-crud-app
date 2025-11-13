@@ -1,4 +1,5 @@
 export default function ProductList({ products, onDetail }) {
+  
   return (
     <div className="flex justify-center w-full">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
