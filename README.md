@@ -1,53 +1,94 @@
-# Simple CRUD Application
+# BASIC-CRUD-APP
 
-This is a full-stack CRUD application with user authentication and product management. It uses **PostgreSQL** as database, a clean domain-driven backend, and a frontend following **Atomic Design** principles.
+*Empower Seamless Data Mastery and User Engagement*
+
+**[🚧 Under Development]** **[Open Source]** **[MIT License]**
+
+Built with the tools and technologies:
+
+`express` `json` `markdown` `npm` `.env` `javascript` `nodemon` `react` `sequelize` `tailwindcss` `vite` 
 
 ---
 
-## Features
+## Table of Contents
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Usage](#usage)
 
-### User Authentication
-- **Register**: Users can register with a username and password.
-- **Login**: Users can login using their username and password.
+---
 
-### Product Management
-- **Add Product**: Users can add products with a name, description, and image (dummy image is provided in the backend controller).
-- **Product Pagination**: Products are paginated with **10 products per page**.
-- **Product Detail**: Shows product image, name, and description.
-- **Edit Product**: Edit product details similar to Add Product.
-- **Delete Product**: Remove a product from the database.
+## Overview
 
-### Frontend
-- Built using **Atomic Design** principles:  
-  - **Atoms**: Buttons 
-  - **Molecules**: Add/Edit product page, product card
-  - **Organisms**: Product Lists, Navbar  
-  - **Pages**: Product list page, Product detail page, Login Page, Register Page
+**basic-crud-app** is a full-stack starter template designed to accelerate the development of CRUD applications with user authentication and product management features. It combines a **React** frontend built with **Vite and Tailwind CSS** with a **Node.js** backend using **Express**, **PostgreSQL**, and **JWT** based security. The project emphasizes modular architecture following Atomic Design principles, making it easy to extend and maintain.
 
-### Backend
-- **Clean Domain Driven Design**
-- **PostgreSQL** database with migrations
-- No ORM is used
-- Database seeding included for example users and products
-- Shared **entities/models** between frontend and backend for consistency
+
+### Why basic-crud-app?
+
+This application provides a robust and developer-friendly foundation for building modern web applications. Its features include:
+
+- 🧩 **Modular Architecture:** Clear separation of frontend components and backend layers for maintainability.
+- ⚡ **Fast Development:** React + Vite setup with HMR and ESLint for rapid iteration.
+- 🔐 **Secure Authentication:** JWT tokens and bcrypt hasing for user login and registration.
+- 🛢️ **Database Management:** Migration and seed scripts streamline setup and testing.
+- ♻️ **Reusable UI Components:** consistent, accessible elements for a cohesive user experience.
+- 🔗 **Seamless API Integration:** Centralized HTTPS clients simplifies client-server communacation.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+This project requires the following dependencies:
+
+- **Programming Language:** JavaScript  
+- **Package Manager:** Npm  
 
 ---
 
 ## Installation
 
-1. Clone the repository:
+Build basic-crud-app from the source and install dependencies
+
+### 1. Clone repository:
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/ikramh/basics-crud-app
+```
+
+### 2. Navigate to the project directory:
+
+```bash
+cd basic-crud-app
+```
+
+### 3. Install the dependencies:
+Using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+```bash
 npm install
+```
 
-# Example with psql
-createdb simple_crud_db
-npm run migrate
-npm run seed
+## Usage
 
-## Start the backend server:
-npx nodemon src/app.js --> use nodemon
-## Start the frontend server:
+Run the project with : 
+Using [npm] (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+open terminal in backend and frontend files:
+```bash
+touch .env
+```
+The contents are adjusted to .env.example and matched to yours
+
+run the application in the backend file
+
+```bash
+npm start
+```
+
+run the application in the frontend file
+```bash
 npm run dev
+```
